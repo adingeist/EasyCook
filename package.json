@@ -1,6 +1,6 @@
 {
   "name": "easy-cook",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A cooking utility library that easily lets you convert between mass and volume units.",
   "main": "index.js",
   "scripts": {
