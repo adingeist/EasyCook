@@ -1,5 +1,5 @@
 {
-  "name": "@adingeist/easy-cook",
+  "name": "easy-cook",
   "version": "0.0.1",
   "description": "A cooking utility library that easily lets you convert between mass and volume units.",
   "main": "index.js",
