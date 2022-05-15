@@ -48,9 +48,9 @@ const NAME_MAPS: Record<
   cups: 'cup',
   C: 'cup',
   c: 'cup',
-  pint: 'cup',
-  pints: 'cup',
-  pt: 'cup',
+  pint: 'pint',
+  pints: 'pint',
+  pt: 'pint',
   quart: 'quart',
   quarts: 'quart',
   qt: 'quart',
@@ -103,8 +103,8 @@ export const getUnitMeasuringType = (
 
   const massUnits = ['gram', 'kilogram', 'ounce', 'pound'];
 
-  if (volUnits.includes(unitAbv)) return 'volume';
-  else if (massUnits.includes(unitAbv)) return 'mass';
+  if (volUnits.includes(unit)) return 'volume';
+  else if (massUnits.includes(unit)) return 'mass';
   else throw new Error(`Unexpected unit, ${unit}`);
 };
 
@@ -136,13 +136,18 @@ export class Measurement {
       throw new Error(`Mass unit ${massUnit} can't measure mass.`);
 
     if (getUnitMeasuringType(volumeUnit) !== 'volume')
-      throw new Error(`Mass unit ${volumeUnit} can't measure volume.`);
+      throw new Error(
+        `Mass unit ${volumeUnit} can't measure volume.`
+      );
 
-    const convert = (qty: number, unit: AllVolumeTypes | AllMassTypes) =>
-      new Measurement(qty, unit);
+    const convert = (
+      qty: number,
+      unit: AllVolumeTypes | AllMassTypes
+    ) => new Measurement(qty, unit);
 
     this.density =
-      convert(mass, massUnit).to('g') / convert(volume, volumeUnit).to('mL');
+      convert(mass, massUnit).to('g') /
+      convert(volume, volumeUnit).to('mL');
 
     return this;
   }
@@ -165,7 +170,9 @@ export class Measurement {
       // 'mass' --> 'mass'
       return (
         this.qty *
-        MASS_RATIOS[this.unit as LongMassTypes][targetUnit as LongMassTypes]
+        MASS_RATIOS[this.unit as LongMassTypes][
+          targetUnit as LongMassTypes
+        ]
       );
     } else if (
       // 'mass' --> 'volume' : can be solved with density
@@ -176,7 +183,10 @@ export class Measurement {
       const unitInGrams =
         this.qty * MASS_RATIOS[this.unit as LongMassTypes].gram; // g
       const qtyInMl = unitInGrams / this.density; // g / (g/mL)  = mL
-      return qtyInMl * VOLUME_RATIOS.milliliter[targetUnit as LongVolumeTypes]; // mL * (mL/tsp)
+      return (
+        qtyInMl *
+        VOLUME_RATIOS.milliliter[targetUnit as LongVolumeTypes]
+      ); // mL * (mL/tsp)
     } else if (
       // 'mass' --> 'volume' : can be solved with density
       this.density &&
@@ -184,7 +194,8 @@ export class Measurement {
       targetMeasure === 'mass'
     ) {
       const unitInMl =
-        this.qty * VOLUME_RATIOS[this.unit as LongVolumeTypes].milliliter;
+        this.qty *
+        VOLUME_RATIOS[this.unit as LongVolumeTypes].milliliter;
       const qtyInG = unitInMl * this.density;
       return qtyInG * MASS_RATIOS.gram[targetUnit as LongMassTypes];
     } else if (
