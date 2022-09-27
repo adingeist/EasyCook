@@ -53,10 +53,10 @@ console.log(EasyCook.getUnitMeasuringType('cans')); // 'unknown'
 ### Convert percent daily value to grams of every FDA nutrient
 
 ```javascript
-console.log(change(100).percentDV('Sodium').toGrams()); // 2.3g
-console.log(change(100).percentDV('Sodium').toLabelUnit()); // 2300mg
-console.log(change(2.3).grams('Sodium').toLabelUnit()); // 2300mg
-console.log(change(2.3).grams('Sodium').toPercentDV()); // 100% DV
-console.log(change(2300).labelUnit('Sodium').toGrams()); // 2.3g
-console.log(change(2300).labelUnit('Sodium').toPercentDV()); // 100% DV
+console.log(EasyCook.change(100).percentDV('Sodium').toGrams()); // 2.3g
+console.log(EasyCook.change(100).percentDV('Sodium').toLabelUnit()); // 2300mg
+console.log(EasyCook.change(2.3).grams('Sodium').toLabelUnit()); // 2300mg
+console.log(EasyCook.change(2.3).grams('Sodium').toPercentDV()); // 100% DV
+console.log(EasyCook.change(2300).labelUnit('Sodium').toGrams()); // 2.3g
+console.log(EasyCook.change(2300).labelUnit('Sodium').toPercentDV()); // 100% DV
 ```
