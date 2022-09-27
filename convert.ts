@@ -92,10 +92,23 @@ export type MassTable = Record<
   Record<LongMassTypes, number>
 >;
 
-const NAME_MAPS: Record<
-  AllVolumeTypes | AllMassTypes,
-  LongVolumeTypes | LongMassTypes
-> = {
+const MASS_NAME_MAPS: Record<AllMassTypes, LongMassTypes> = {
+  gram: 'gram',
+  grams: 'gram',
+  g: 'gram',
+  kilogram: 'kilogram',
+  kilograms: 'kilogram',
+  kg: 'kilogram',
+  ounce: 'ounce',
+  ounces: 'ounce',
+  oz: 'ounce',
+  pound: 'pound',
+  pounds: 'pound',
+  lb: 'pound',
+  '#': 'pound',
+};
+
+const VOLUME_NAME_MAPS: Record<AllVolumeTypes, LongVolumeTypes> = {
   liter: 'liter',
   liters: 'liter',
   l: 'liter',
@@ -143,26 +156,21 @@ const NAME_MAPS: Record<
   gallon: 'gallon',
   gallons: 'gallon',
   gal: 'gallon',
-
-  gram: 'gram',
-  grams: 'gram',
-  g: 'gram',
-  kilogram: 'kilogram',
-  kilograms: 'kilogram',
-  kg: 'kilogram',
-  ounce: 'ounce',
-  ounces: 'ounce',
-  oz: 'ounce',
-  pound: 'pound',
-  pounds: 'pound',
-  lb: 'pound',
-  '#': 'pound',
 };
+
+export const allVolumeTypes = Object.keys(
+  VOLUME_NAME_MAPS
+) as AllVolumeTypes[];
+
+export const allMassTypes = Object.keys(
+  MASS_NAME_MAPS
+) as AllMassTypes[];
 
 const getFullUnitName = (
   unit: AllVolumeTypes | AllMassTypes
 ): LongMassTypes | LongVolumeTypes => {
-  return NAME_MAPS[unit];
+  // @ts-ignore - should return undefined if unit isn't mapped to anything
+  return MASS_NAME_MAPS[unit] || VOLUME_NAME_MAPS[unit];
 };
 
 export const getUnitMeasuringType = (

@@ -1,5 +1,7 @@
 import {
+  allMassTypes,
   AllMassTypes,
+  allVolumeTypes,
   AllVolumeTypes,
   getUnitMeasuringType,
   Measurement,
@@ -17,4 +19,6 @@ export const EasyCook = {
   change,
   getUnitMeasuringType,
   getLabelUnit,
+  allVolumeTypes,
+  allMassTypes,
 };
