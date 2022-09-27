@@ -7,7 +7,7 @@ const NUTRIENT_DVS = {
   'Trans Fat': 0, // 0g
   'Monounsaturated Fat': 0, // 0g
   'Polyunsaturated Fat': 0, // 0g
-  'Total carbohydrate': 275, // 275g
+  'Total Carbohydrates': 275, // 275g
   'Vitamin A': 900e-6, // 900mcg
   'Vitamin B12': 2.4e-6, // 2.4mcg
   'Vitamin B6': 1.7e-3, // 1.7mg
@@ -15,6 +15,8 @@ const NUTRIENT_DVS = {
   'Vitamin D': 20e-6, // 20mcg
   'Vitamin E': 15e-3, // 15mg
   'Vitamin K': 120e-6, // 120mcg
+  'Total Sugars': -1, // not given by FDA
+  'Sugar Alcohols': -1, // not given by FDA
   Calories: 2000, // 2000 kcal
   Caffeine: 400, // 400 mg
   Biotin: 30e-6, // 30mcg
@@ -65,7 +67,7 @@ const NUTRIENT_UNITS: Record<Nutrients, number> = {
   Selenium: 1e-6, // mcg
   Sodium: 1e-3, // mg
   Thiamin: 1e-3, // mg
-  'Total carbohydrate': 275, // 275g
+  'Total Carbohydrates': 275, // 275g
   'Vitamin B6': 1e-3, // mg
   'Vitamin B12': 1e-6, // mcg
   'Vitamin E': 1e-3, // mg
@@ -82,6 +84,8 @@ const NUTRIENT_UNITS: Record<Nutrients, number> = {
   'Trans Fat': 1, // g
   'Monounsaturated Fat': 1, // g
   'Polyunsaturated Fat': 1, // g
+  'Sugar Alcohols': 1, // g
+  'Total Sugars': 1, // g
 };
 
 export const getLabelUnit = (nutrient: Nutrients) => {
