@@ -36,16 +36,84 @@ const NUTRIENT_DVS = {
   Choline: 550e-3, // 550mg
 };
 
-type Nutrients = keyof typeof NUTRIENT_DVS;
-
-export const change = (qty: number, nutrient: Nutrients) => {
-  const toPercentDailyValue = () =>
-    (qty / 100) * NUTRIENT_DVS[nutrient];
-
-  const toGrams = () => (qty * 100) / NUTRIENT_DVS[nutrient];
-
-  return {
-    toPercentDailyValue,
-    toGrams,
-  };
+const NUTRIENT_UNITS: Record<Nutrients, number> = {
+  Calcium: 1e-3, // mg
+  'Dietary Fiber': 1, // g
+  Fat: 1, // g
+  Magnesium: 1e-3, // mg
+  Manganese: 1e-3, // mg
+  Phosphorus: 1e-3, // mg
+  Potassium: 1e-3, // mg
+  'Vitamin A': 1e-6, // mcg
+  'Vitamin C': 1e-3, // mg
+  'Vitamin D': 1e-6, // mcg
+  'Vitamin K': 1e-6, // mcg
+  Biotin: 1e-6, // mcg
+  Chloride: 1e-3, // mg
+  Chromium: 1e-6, // mcg
+  Copper: 1e-3, // mg
+  'Folic Acid': 1e-6, // mcg
+  Molybdenum: 1e-6, // mcg
+  Niacin: 1e-3, // mg
+  'Pantothenic Acid': 1e-3, // mg
+  Riboflavin: 1e-3, // mg
+  Selenium: 1e-6, // mcg
+  Sodium: 1e-3, // mg
+  Thiamin: 1e-3, // mg
+  'Total carbohydrate': 275, // 275g
+  'Vitamin B6': 1e-3, // mg
+  'Vitamin B12': 1e-6, // mcg
+  'Vitamin E': 1e-3, // mg
+  Zinc: 1e-3, // mg
+  Cholesterol: 1e-3, // mg
+  Iodine: 1e-6, // mcg
+  Iron: 1e-3, // mg
+  Protein: 1, // g
+  'Saturated Fat': 1, // g
+  'Added Sugars': 1, // g
+  Choline: 1e-3, // mg
 };
+
+export type Nutrients = keyof typeof NUTRIENT_DVS;
+
+const gramsToPercentDV = (grams: number, nutrient: Nutrients) =>
+  (grams * 100) / NUTRIENT_DVS[nutrient];
+
+const percentDVToGrams = (percent: number, nutrient: Nutrients) =>
+  Math.round((percent / 100) * NUTRIENT_DVS[nutrient]);
+
+const gramsToLabelUnit = (grams: number, nutrient: Nutrients) =>
+  grams / NUTRIENT_UNITS[nutrient];
+
+const percentToLabelUnit = (percent: number, nutrient: Nutrients) =>
+  percentDVToGrams(percent, nutrient) / NUTRIENT_UNITS[nutrient];
+
+const labelUnitToGrams = (
+  labelUnitQty: number,
+  nutrient: Nutrients
+) => labelUnitQty * NUTRIENT_UNITS[nutrient];
+
+const labelUnitToPercentDV = (
+  labelUnitQty: number,
+  nutrient: Nutrients
+) => {
+  const grams = labelUnitToGrams(labelUnitQty, nutrient);
+  return Math.round(gramsToPercentDV(grams, nutrient));
+};
+
+export const change = (qty: number) => ({
+  percentDV: (nutrient: Nutrients) => ({
+    toGrams: () => percentDVToGrams(qty, nutrient),
+    toLabelUnit: () => percentToLabelUnit(qty, nutrient),
+  }),
+
+  labelUnit: (nutrient: Nutrients) => ({
+    toPercentDV: () => labelUnitToPercentDV(qty, nutrient),
+    toGrams: () => labelUnitToGrams(qty, nutrient),
+  }),
+
+  grams: (nutrient: Nutrients) => ({
+    toPercentDV: () => gramsToPercentDV(qty, nutrient),
+    toLabelUnit: () => gramsToLabelUnit(qty, nutrient),
+  }),
+});
