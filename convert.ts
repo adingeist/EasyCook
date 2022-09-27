@@ -81,7 +81,7 @@ const getFullUnitName = (
 
 export const getUnitMeasuringType = (
   unitAbv: AllVolumeTypes | AllMassTypes
-): 'volume' | 'mass' => {
+): 'volume' | 'mass' | 'unknown' => {
   const unit = getFullUnitName(unitAbv);
 
   const volUnits = [
@@ -105,7 +105,7 @@ export const getUnitMeasuringType = (
 
   if (volUnits.includes(unit)) return 'volume';
   else if (massUnits.includes(unit)) return 'mass';
-  else throw new Error(`Unexpected unit, ${unit}`);
+  else return 'unknown';
 };
 
 const ingredient = {
