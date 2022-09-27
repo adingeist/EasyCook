@@ -166,7 +166,7 @@ const getFullUnitName = (
 };
 
 export const getUnitMeasuringType = (
-  unitAbv: AllVolumeTypes | AllMassTypes
+  unitAbv: AllVolumeTypes | AllMassTypes | any
 ): 'volume' | 'mass' | 'unknown' => {
   const unit = getFullUnitName(unitAbv);
 
