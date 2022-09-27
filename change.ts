@@ -1,39 +1,44 @@
 const NUTRIENT_DVS = {
-  Calcium: 1300e-3, // 1300mg
+  'Added Sugars': 50, // 50g
   'Dietary Fiber': 28, // 28g
-  Fat: 78, // 78g
-  Magnesium: 420e-3, // 420mg
-  Manganese: 2.3e-3, // 2.3mg
-  Phosphorus: 1250e-3, // 1250mg
-  Potassium: 4700e-3, // 4700mg
+  'Folic Acid': 400e-6, // 400mcg
+  'Pantothenic Acid': 5e-3, // 5mg
+  'Saturated Fat': 20, // 20g
+  'Trans Fat': 0, // 0g
+  'Monounsaturated Fat': 0, // 0g
+  'Polyunsaturated Fat': 0, // 0g
+  'Total carbohydrate': 275, // 275g
   'Vitamin A': 900e-6, // 900mcg
+  'Vitamin B12': 2.4e-6, // 2.4mcg
+  'Vitamin B6': 1.7e-3, // 1.7mg
   'Vitamin C': 90e-3, // 90mg
   'Vitamin D': 20e-6, // 20mcg
+  'Vitamin E': 15e-3, // 15mg
   'Vitamin K': 120e-6, // 120mcg
+  Calories: 2000, // 2000 kcal
+  Caffeine: 400, // 400 mg
   Biotin: 30e-6, // 30mcg
+  Calcium: 1300e-3, // 1300mg
   Chloride: 2300e-3, // 2300mg
+  Cholesterol: 300e-3, // 300mg
+  Choline: 550e-3, // 550mg
   Chromium: 35e-6, // 35mcg
   Copper: 0.9e-3, // 0.9mg
-  'Folic Acid': 400e-6, // 400mcg
+  Fat: 78, // 78g
+  Iodine: 150e-6, // 150mcg
+  Iron: 18e-3, // 18mg
+  Magnesium: 420e-3, // 420mg
+  Manganese: 2.3e-3, // 2.3mg
   Molybdenum: 45e-6, // 45mcg
   Niacin: 16e-3, // 16mg
-  'Pantothenic Acid': 5e-3, // 5mg
+  Phosphorus: 1250e-3, // 1250mg
+  Potassium: 4700e-3, // 4700mg
+  Protein: 50, // 50g
   Riboflavin: 1.3e-3, // 1.3mg
   Selenium: 55e-6, // 55mcg
   Sodium: 2300e-3, // 2300mg
   Thiamin: 1.2e-3, // 1.2mg
-  'Total carbohydrate': 275, // 275g
-  'Vitamin B6': 1.7e-3, // 1.7mg
-  'Vitamin B12': 2.4e-6, // 2.4mcg
-  'Vitamin E': 15e-3, // 15mg
   Zinc: 11e-3, // 11mg
-  Cholesterol: 300e-3, // 300mg
-  Iodine: 150e-6, // 150mcg
-  Iron: 18e-3, // 18mg
-  Protein: 50, // 50g
-  'Saturated Fat': 20, // 20g
-  'Added Sugars': 50, // 50g
-  Choline: 550e-3, // 550mg
 };
 
 const NUTRIENT_UNITS: Record<Nutrients, number> = {
@@ -72,18 +77,41 @@ const NUTRIENT_UNITS: Record<Nutrients, number> = {
   'Saturated Fat': 1, // g
   'Added Sugars': 1, // g
   Choline: 1e-3, // mg
+  Caffeine: 1e-3, // mg
+  Calories: 1, // kcal
+  'Trans Fat': 1, // g
+  'Monounsaturated Fat': 1, // g
+  'Polyunsaturated Fat': 1, // g
+};
+
+export const getLabelUnit = (nutrient: Nutrients) => {
+  switch (NUTRIENT_UNITS[nutrient]) {
+    case 1:
+      return 'g';
+    case 1e-3:
+      return 'mg';
+    case 1e-6:
+      return 'μg';
+    default:
+      return '';
+  }
 };
 
 export type Nutrients = keyof typeof NUTRIENT_DVS;
 
-const gramsToPercentDV = (grams: number, nutrient: Nutrients) =>
-  (grams * 100) / NUTRIENT_DVS[nutrient];
+const gramsToPercentDV = (grams: number, nutrient: Nutrients) => {
+  if (NUTRIENT_DVS[nutrient] === 0) {
+    return 100;
+  }
+  return (grams * 100) / NUTRIENT_DVS[nutrient];
+};
 
 const percentDVToGrams = (percent: number, nutrient: Nutrients) =>
   Math.round((percent / 100) * NUTRIENT_DVS[nutrient]);
 
-const gramsToLabelUnit = (grams: number, nutrient: Nutrients) =>
-  grams / NUTRIENT_UNITS[nutrient];
+const gramsToLabelUnit = (grams: number, nutrient: Nutrients) => {
+  return grams / NUTRIENT_UNITS[nutrient];
+};
 
 const percentToLabelUnit = (percent: number, nutrient: Nutrients) =>
   percentDVToGrams(percent, nutrient) / NUTRIENT_UNITS[nutrient];

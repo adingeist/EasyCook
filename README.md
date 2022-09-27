@@ -60,3 +60,11 @@ console.log(EasyCook.change(2.3).grams('Sodium').toPercentDV()); // 100% DV
 console.log(EasyCook.change(2300).labelUnit('Sodium').toGrams()); // 2.3g
 console.log(EasyCook.change(2300).labelUnit('Sodium').toPercentDV()); // 100% DV
 ```
+
+### Get the label unit of a given nutrient
+
+```javascript
+console.log(EasyCook.getLabelUnit('Sodium')); // mg
+console.log(EasyCook.getLabelUnit('Vitamin A')); // μg
+console.log(EasyCook.getLabelUnit('Calories')); // g
+```
