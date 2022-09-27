@@ -1,4 +1,4 @@
-import { MassTable, VolumeTable } from 'easy-cook';
+import { MassTable, VolumeTable } from './convert';
 
 export const MASS_RATIOS: MassTable = {
   gram: {
