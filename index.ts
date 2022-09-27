@@ -1,6 +1,10 @@
-import { getUnitMeasuringType, Measurement } from './convert';
+import {
+  AllMassTypes,
+  AllVolumeTypes,
+  getUnitMeasuringType,
+  Measurement,
+} from './convert';
 import { change, getLabelUnit } from './change';
-import { AllMassTypes, AllVolumeTypes } from 'easy-cook';
 
 export type { Nutrients } from './change';
 export type { Measurement } from './convert';
