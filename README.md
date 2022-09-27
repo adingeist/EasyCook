@@ -50,7 +50,7 @@ console.log(EasyCook.getUnitMeasuringType('box')); // 'unknown'
 console.log(EasyCook.getUnitMeasuringType('cans')); // 'unknown'
 ```
 
-### Convert %DV to grams of every FDA nutrient
+### Convert percent daily value to grams of every FDA nutrient
 
 ```javascript
 console.log(EasyCook.change(2.3, 'Sodium').toPercentDailyValue()); // 100%
