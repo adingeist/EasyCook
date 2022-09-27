@@ -14,7 +14,3 @@ export const EasyCook = {
   getUnitMeasuringType,
   getLabelUnit,
 };
-
-console.log(EasyCook.getLabelUnit('Sodium')); // mg
-console.log(EasyCook.getLabelUnit('Vitamin A')); // μg
-console.log(EasyCook.getLabelUnit('Calories')); // g
