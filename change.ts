@@ -67,7 +67,7 @@ const NUTRIENT_UNITS: Record<Nutrients, number> = {
   Selenium: 1e-6, // mcg
   Sodium: 1e-3, // mg
   Thiamin: 1e-3, // mg
-  'Total Carbohydrates': 275, // 275g
+  'Total Carbohydrates': 1, // 275g
   'Vitamin B6': 1e-3, // mg
   'Vitamin B12': 1e-6, // mcg
   'Vitamin E': 1e-3, // mg

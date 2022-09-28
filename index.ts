@@ -9,7 +9,13 @@ import {
 import { change, getLabelUnit } from './change';
 
 export type { Nutrients } from './change';
-export type { Measurement } from './convert';
+export type {
+  Measurement,
+  AllMassTypes,
+  AllVolumeTypes,
+  LongMassTypes,
+  LongVolumeTypes,
+} from './convert';
 
 const convert = (qty: number, unit: AllVolumeTypes | AllMassTypes) =>
   new Measurement(qty, unit);
