@@ -18,7 +18,7 @@ const NUTRIENT_DVS = {
   'Total Sugars': -1, // not given by FDA
   'Sugar Alcohols': -1, // not given by FDA
   Calories: 2000, // 2000 kcal
-  Caffeine: 400, // 400 mg
+  Caffeine: 400e-3, // 400 mg
   Biotin: 30e-6, // 30mcg
   Calcium: 1300e-3, // 1300mg
   Chloride: 2300e-3, // 2300mg
