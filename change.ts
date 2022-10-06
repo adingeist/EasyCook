@@ -89,6 +89,14 @@ const NUTRIENT_UNITS: Record<Nutrients, number> = {
 };
 
 export const getLabelUnit = (nutrient: Nutrients) => {
+  switch (nutrient) {
+    case 'Calories':
+      return 'kcal';
+
+    default:
+      break;
+  }
+
   switch (NUTRIENT_UNITS[nutrient]) {
     case 1:
       return 'g';
